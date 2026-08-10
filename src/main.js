@@ -28,6 +28,22 @@ scene.add(cube);
 // to avoid this, move the camera out a bit
 camera.position.z = 5;
 
+// Add wireframe (border) to the object
+// C1: border + đường chéo các mặt cạnh bên của khối hộp vì vì mọi vật thể 3D máy tính (bao gồm cả Three.js) đều được cấu tạo từ các hình tam giác
+// const wireframeMaterial = new THREE.MeshBasicMaterial({
+//   color: 0xffff00,
+//   wireframe: true, // vẽ ra toàn bộ các đường nối giữa tất cả các đỉnh (vertices) tạo nên cấu trúc hình học
+// });
+// const wireframeCube = new THREE.Mesh(geometry, wireframeMaterial);
+// cube.add(wireframeCube);
+// C2: only real border
+const edges = new THREE.EdgesGeometry(geometry);
+const lineMaterial = new THREE.LineBasicMaterial({
+  color: 0xffff00,
+});
+const wireframe = new THREE.LineSegments(edges, lineMaterial);
+cube.add(wireframe);
+
 // RENDERER
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(windowWidth, windowHeight);
