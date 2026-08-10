@@ -1,6 +1,7 @@
 // 3 things needed to display anything with three.js: scene, camera and renderer
 // So that we can render the scene with camera
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
@@ -47,6 +48,10 @@ cube.add(wireframe);
 // RENDERER
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(windowWidth, windowHeight);
+
+// Allow rotate, zoom objects
+const controls = new OrbitControls(camera, renderer.domElement);
+
 function animate(time) {
   cube.rotation.x = time / 2000;
   cube.rotation.y = time / 1000;
